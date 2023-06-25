@@ -17,8 +17,6 @@
 		63938C742A38BD2C00734619 /* AppFilterProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C732A38BD2C00734619 /* AppFilterProvider.m */; };
 		63938C762A38BD2C00734619 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C752A38BD2C00734619 /* main.m */; };
 		63938C7B2A38BD2C00734619 /* com.azimgd.BorderControl.Network.systemextension in Embed System Extensions */ = {isa = PBXBuildFile; fileRef = 63938C6F2A38BD2C00734619 /* com.azimgd.BorderControl.Network.systemextension */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		63938C822A38BD8500734619 /* NetworkCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C812A38BD8500734619 /* NetworkCommunication.m */; };
-		63938C832A38BD8500734619 /* NetworkCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C812A38BD8500734619 /* NetworkCommunication.m */; };
 		63938C862A38BE4D00734619 /* NetworkExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C852A38BE4D00734619 /* NetworkExtension.m */; };
 		63938C872A38BE4D00734619 /* NetworkExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C852A38BE4D00734619 /* NetworkExtension.m */; };
 		63938C902A39CD7A00734619 /* ExtensionBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C8F2A39CD7A00734619 /* ExtensionBundle.m */; };
@@ -66,8 +64,6 @@
 		63938C752A38BD2C00734619 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		63938C772A38BD2C00734619 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63938C782A38BD2C00734619 /* Network.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Network.entitlements; sourceTree = "<group>"; };
-		63938C802A38BD7400734619 /* NetworkCommunication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkCommunication.h; sourceTree = "<group>"; };
-		63938C812A38BD8500734619 /* NetworkCommunication.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkCommunication.m; sourceTree = "<group>"; };
 		63938C842A38BE3E00734619 /* NetworkExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkExtension.h; sourceTree = "<group>"; };
 		63938C852A38BE4D00734619 /* NetworkExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkExtension.m; sourceTree = "<group>"; };
 		63938C8E2A39CD6B00734619 /* ExtensionBundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtensionBundle.h; sourceTree = "<group>"; };
@@ -147,8 +143,6 @@
 				63938C752A38BD2C00734619 /* main.m */,
 				63938C772A38BD2C00734619 /* Info.plist */,
 				63938C782A38BD2C00734619 /* Network.entitlements */,
-				63938C802A38BD7400734619 /* NetworkCommunication.h */,
-				63938C812A38BD8500734619 /* NetworkCommunication.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -262,7 +256,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				63938C5A2A38BCD600734619 /* ViewController.m in Sources */,
-				63938C822A38BD8500734619 /* NetworkCommunication.m in Sources */,
 				63938C612A38BCD800734619 /* main.m in Sources */,
 				63938C902A39CD7A00734619 /* ExtensionBundle.m in Sources */,
 				63938C572A38BCD600734619 /* AppDelegate.m in Sources */,
@@ -275,7 +268,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				63938C872A38BE4D00734619 /* NetworkExtension.m in Sources */,
-				63938C832A38BD8500734619 /* NetworkCommunication.m in Sources */,
 				63938C762A38BD2C00734619 /* main.m in Sources */,
 				63938C742A38BD2C00734619 /* AppFilterProvider.m in Sources */,
 				63938C912A39CD7A00734619 /* ExtensionBundle.m in Sources */,
