@@ -9,10 +9,12 @@
 #import <SocketRocket/SocketRocket.h>
 #import "NetworkCommunication.h"
 
+NSString *WS_ENDPOINT_URI = @"ws://localhost:8080";
+
 @implementation NetworkCommunication
 
 - (void)connect {
-  self.webSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:@"ws://localhost:8080"]];
+  self.webSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:WS_ENDPOINT_URI]];
   self.webSocket.delegate = self;
   [self.webSocket open];
 }
@@ -21,14 +23,14 @@
   NSError *error;
   NSData *data = [NSJSONSerialization dataWithJSONObject:payload options:0 error:&error];
 
-  if (!error) {
-    if (self.webSocket.readyState == SR_OPEN) {
-      [self.webSocket sendData:data error:&error];
-    } else {
-      NSLog(@"WebSocket connection is not open");
-    }
+  if (error) {
+    return NSLog(@"[border-control-network] websocket error converting json object to data: %@", error);
+  }
+  
+  if (self.webSocket.readyState == SR_OPEN) {
+    [self.webSocket sendData:data error:&error];
   } else {
-    NSLog(@"Error converting JSON object to data: %@", error);
+    NSLog(@"[border-control-network] websocket connection is not setup");
   }
 }
 
@@ -40,19 +42,19 @@
 #pragma mark - SRWebSocketDelegate
 
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket {
-  NSLog(@"WebSocket connection opened");
+  NSLog(@"[border-control-network] websocket connection opened");
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
-  NSLog(@"Received message: %@", message);
+  NSLog(@"[border-control-network] websocket received message: %@", message);
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
-  NSLog(@"WebSocket failed with error: %@", error);
+  NSLog(@"[border-control-network] websocket failed with error: %@", error);
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
-  NSLog(@"WebSocket closed with code: %ld reason: %@ clean: %d", (long)code, reason, wasClean);
+  NSLog(@"[border-control-network] websocket closed with code: %ld reason: %@ clean: %d", (long)code, reason, wasClean);
 }
 
 @end
