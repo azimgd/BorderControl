@@ -12,6 +12,7 @@
 @implementation NetworkCommunication
 
 - (void)connect {
+  NSLog(@"[border-control-network] websocket connection is pending");
   self.webSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:@"ws://localhost:8881"]];
   self.webSocket.delegate = self;
   [self.webSocket open];

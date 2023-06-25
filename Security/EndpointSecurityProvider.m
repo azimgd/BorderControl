@@ -9,24 +9,44 @@
 #import "EndpointSecurityProvider.h"
 #import "SecurityCommunication.h"
 
+NSString* convert(es_string_token_t* stringToken){
+  return [[NSString alloc] initWithBytes:stringToken->data length:stringToken->length encoding:NSUTF8StringEncoding];
+}
+
 @implementation EndpointSecurityProvider
 
 static SecurityCommunication *securityCommunication;
 
 - (void)handleMessage:(const es_message_t *)message {
-  NSDictionary *payload = @{
-    @"message": @"starting the client",
-  };
-  [securityCommunication dispatch:payload];
-  
-  switch (message->event_type) {
-    case ES_EVENT_TYPE_AUTH_EXEC:
-      es_respond_auth_result(self.client, message, ES_AUTH_RESULT_ALLOW, true);
-      break;
-    default:
-      NSLog(@"[border-control-security] endpoint framework unexpected event type: %i", message->event_type);
-      break;
+  if (message->event_type == ES_EVENT_TYPE_NOTIFY_OPEN) {
+    NSDictionary *payload = @{
+      @"event": @"open",
+      @"destination": [[NSString alloc] initWithFormat:@"%s", message->event.open.file->path.data]
+    };
+    [securityCommunication dispatch:payload];
   }
+  else if (message->event_type == ES_EVENT_TYPE_NOTIFY_CLOSE) {
+    NSDictionary *payload = @{
+      @"event": @"close",
+      @"destination": [[NSString alloc] initWithFormat:@"%s", message->event.close.target->path.data]
+    };
+    [securityCommunication dispatch:payload];
+  }
+  else if (message->event_type == ES_EVENT_TYPE_NOTIFY_WRITE) {
+    NSDictionary *payload = @{
+      @"event": @"write",
+      @"destination": [[NSString alloc] initWithFormat:@"%s", message->event.write.target->path.data]
+    };
+    [securityCommunication dispatch:payload];
+  }
+  else if (message->event_type == ES_EVENT_TYPE_NOTIFY_CREATE) {
+    NSDictionary *payload = @{
+      @"event": @"create",
+      @"destination": [[NSString alloc] initWithFormat:@"%s", message->event.create.destination.new_path.filename.data]
+    };
+    [securityCommunication dispatch:payload];
+  }
+  else {}
 }
 
 - (void)start {
@@ -39,7 +59,6 @@ static SecurityCommunication *securityCommunication;
   
   switch (newClientResult) {
     case ES_NEW_CLIENT_RESULT_SUCCESS:
-      // Client created successfully; continue.
       break;
     case ES_NEW_CLIENT_RESULT_ERR_NOT_ENTITLED:
       NSLog(@"[border-control-security] endpoint framework extension is missing entitlement");
@@ -60,11 +79,41 @@ static SecurityCommunication *securityCommunication;
       NSLog(@"[border-control-security] endpoint framework failed to connect to the Endpoint Security subsystem");
       break;
   }
+  
+  NSArray<NSString *> *paths = @[
+    @"/Applications/",
+    @"/bin/",
+    @"/cores/",
+    @"/dev/",
+    @"/Library/",
+    @"/opt/",
+    @"/private/",
+    @"/sbin/",
+    @"/System/",
+    @"/usr/",
+    @"/var/",
+  ];
+  
+  for (NSString *path in paths) {
+    es_mute_path(_client, [path UTF8String], ES_MUTE_PATH_TYPE_PREFIX);
+  }
+
+  es_mute_path(_client, [NSProcessInfo.processInfo.arguments[0] UTF8String], ES_MUTE_PATH_TYPE_LITERAL);
+  es_mute_path(_client, "/dev/ttys001", ES_MUTE_PATH_TYPE_LITERAL);
 }
 
 - (void)subscribe {
-  es_event_type_t eventTypes[1] = { ES_EVENT_TYPE_AUTH_EXEC };
-  es_return_t subscribeResult = es_subscribe(self.client, eventTypes, sizeof(eventTypes));
+  es_event_type_t events[] = {
+    ES_EVENT_TYPE_NOTIFY_CREATE,
+    ES_EVENT_TYPE_NOTIFY_OPEN,
+    ES_EVENT_TYPE_NOTIFY_RENAME,
+    ES_EVENT_TYPE_NOTIFY_CLOSE,
+    ES_EVENT_TYPE_NOTIFY_WRITE,
+    ES_EVENT_TYPE_NOTIFY_UNLINK,
+    ES_EVENT_TYPE_NOTIFY_EXIT
+  };
+
+  es_return_t subscribeResult = es_subscribe(self.client, events, sizeof(events) / sizeof(events[0]));
   
   if (subscribeResult != ES_RETURN_SUCCESS) {
     NSLog(@"[border-control-security] endpoint framework failed to subscribe to event");
