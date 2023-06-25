@@ -7,7 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #import "SecurityExtension.h"
-#import "ExtensionBundle.h"
+
+NSString *const securityExtensionBundleId = @"B6BB88CAP5.com.azimgd.BorderControl.Security";
 
 @implementation SecurityExtension
 
@@ -23,10 +24,8 @@ static SecurityExtension *sharedInstance = nil;
 
 - (void)install
 {
-  NSString *extensionBundleId = [[ExtensionBundle shared] extensionBundle:[NSBundle mainBundle]].bundleIdentifier;
-  
   OSSystemExtensionRequest *systemRequest = [OSSystemExtensionRequest
-    activationRequestForExtension:extensionBundleId
+    activationRequestForExtension:securityExtensionBundleId
     queue:dispatch_get_main_queue()
   ];
   

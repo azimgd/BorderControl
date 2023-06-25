@@ -7,7 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #import "NetworkExtension.h"
-#import "ExtensionBundle.h"
+
+NSString *const networkExtensionBundleId = @"B6BB88CAP5.com.azimgd.BorderControl.Security";
 
 @implementation NetworkExtension
 
@@ -23,10 +24,8 @@ static NetworkExtension *sharedInstance = nil;
 
 - (void)install
 {
-  NSString *extensionBundleId = [[ExtensionBundle shared] extensionBundle:[NSBundle mainBundle]].bundleIdentifier;
-  
   OSSystemExtensionRequest *systemRequest = [OSSystemExtensionRequest
-    activationRequestForExtension:extensionBundleId
+    activationRequestForExtension:networkExtensionBundleId
     queue:dispatch_get_main_queue()
   ];
   
@@ -51,15 +50,13 @@ static NetworkExtension *sharedInstance = nil;
 - (void)request:(nonnull OSSystemExtensionRequest *)request didFinishWithResult:(OSSystemExtensionRequestResult)result
 {
   [NEFilterManager.sharedManager loadFromPreferencesWithCompletionHandler:^(NSError * _Nullable error) {
-    NSString *extensionBundleId = [[ExtensionBundle shared] extensionBundle:[NSBundle mainBundle]].bundleIdentifier;
-
     NEFilterProviderConfiguration* configuration = [[NEFilterProviderConfiguration alloc] init];
     configuration.filterPackets = false;
-    configuration.filterDataProviderBundleIdentifier = extensionBundleId;
+    configuration.filterDataProviderBundleIdentifier = networkExtensionBundleId;
     configuration.filterSockets = true;
-    configuration.filterPacketProviderBundleIdentifier = extensionBundleId;
+    configuration.filterPacketProviderBundleIdentifier = networkExtensionBundleId;
     
-    NEFilterManager.sharedManager.localizedDescription = extensionBundleId;
+    NEFilterManager.sharedManager.localizedDescription = networkExtensionBundleId;
     NEFilterManager.sharedManager.enabled = true;
     NEFilterManager.sharedManager.providerConfiguration = configuration;
 

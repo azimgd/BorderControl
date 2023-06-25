@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 #import <NetworkExtension/NetworkExtension.h>
-#import "ExtensionBundle.h"
 
 int main(int argc, char *argv[])
 {
