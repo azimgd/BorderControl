@@ -12,10 +12,12 @@
 #import <NetworkExtension/NetworkExtension.h>
 #import "NetworkCommunication.h"
 
+// From Extension to Host
 @protocol HostCommunication <NSObject>
   - (void)register:(void (^)(BOOL))completionHandler;
 @end
 
+// From Host to Extension
 @protocol ExtensionCommunication <NSObject>
   - (void)register:(void (^)(BOOL))completionHandler;
 @end
@@ -32,9 +34,6 @@
 - (void)registerWithExtension:(NSBundle *)bundle
   delegate:(id<HostCommunication>)delegate
   completionHandler:(void (^)(BOOL))completionHandler;
-
-- (BOOL)logger:(NSString *)payload
-  responseHandler:(void (^)(BOOL))responseHandler;
 
 @end
 

@@ -51,7 +51,7 @@ static NetworkCommunication *sharedInstance = nil;
   newConnection.exportedInterface = exportedInterface;
   newConnection.exportedObject = delegate;
 
-  // The remote object is the provider's NetworkConnection instance.
+  // The remote object is the extenion's NetworkCommunication instance.
   NSXPCInterface *remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(ExtensionCommunication)];
   newConnection.remoteObjectInterface = remoteObjectInterface;
 
@@ -69,7 +69,7 @@ static NetworkCommunication *sharedInstance = nil;
   if (!extensionCommunication) {
     @throw [NSException
       exceptionWithName:NSInternalInconsistencyException
-      reason:@"Failed to create a remote object proxy for the provider"
+      reason:@"Failed to create a remote object proxy for the extension"
       userInfo:nil];
   }
   
@@ -79,7 +79,7 @@ static NetworkCommunication *sharedInstance = nil;
 }
 
 - (BOOL)listener:(NSXPCListener *)listener shouldAcceptNewConnection:(NSXPCConnection *)newConnection {
-  // The exported object is this NetworkConnection instance.
+  // The exported object is this NetworkCommunication instance.
   NSXPCInterface *exportedInterface = [NSXPCInterface interfaceWithProtocol:@protocol(ExtensionCommunication)];
   newConnection.exportedInterface = exportedInterface;
   newConnection.exportedObject = self;
@@ -99,35 +99,6 @@ static NetworkCommunication *sharedInstance = nil;
   self.connection = newConnection;
   [newConnection resume];
 
-  return YES;
-}
-
-- (BOOL)logger:(NSString *)payload responseHandler:(void (^)(BOOL))responseHandler {
-  if (!self.connection) {
-    return NO;
-  }
-  
-  id<HostCommunication> hostCommunication = (id<HostCommunication>)[
-    self.connection
-    remoteObjectProxyWithErrorHandler:^(NSError *error) {
-    [self.connection invalidate];
-    self.connection = nil;
-    responseHandler(NO);
-  }];
-
-  if (!hostCommunication) {
-    @throw [NSException
-      exceptionWithName:NSInternalInconsistencyException
-      reason:@"Failed to create a remote object proxy for the app"
-      userInfo:nil];
-  }
-
-  [hostCommunication register:^(BOOL success) {
-    [self.delegate register:^(BOOL success) {
-      responseHandler(success);
-    }];
-  }];
-  
   return YES;
 }
 

@@ -10,8 +10,8 @@
 		<string>$(TeamIdentifierPrefix)com.azimgd.BorderControl.Network</string>
 		<key>NEProviderClasses</key>
 		<dict>
-			<key>com.apple.networkextension.app-proxy</key>
-			<string>AppProxyProvider</string>
+			<key>com.apple.networkextension.filter-data</key>
+			<string>AppFilterProvider</string>
 		</dict>
 	</dict>
 </dict>

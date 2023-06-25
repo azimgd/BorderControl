@@ -14,7 +14,7 @@
 		63938C612A38BCD800734619 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C602A38BCD800734619 /* main.m */; };
 		63938C6A2A38BD1200734619 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63938C692A38BD1200734619 /* NetworkExtension.framework */; };
 		63938C702A38BD2C00734619 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63938C692A38BD1200734619 /* NetworkExtension.framework */; platformFilter = maccatalyst; };
-		63938C742A38BD2C00734619 /* AppProxyProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C732A38BD2C00734619 /* AppProxyProvider.m */; };
+		63938C742A38BD2C00734619 /* AppFilterProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C732A38BD2C00734619 /* AppFilterProvider.m */; };
 		63938C762A38BD2C00734619 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C752A38BD2C00734619 /* main.m */; };
 		63938C7B2A38BD2C00734619 /* com.azimgd.BorderControl.Network.systemextension in Embed System Extensions */ = {isa = PBXBuildFile; fileRef = 63938C6F2A38BD2C00734619 /* com.azimgd.BorderControl.Network.systemextension */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		63938C822A38BD8500734619 /* NetworkCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C812A38BD8500734619 /* NetworkCommunication.m */; };
@@ -61,8 +61,8 @@
 		63938C622A38BCD800734619 /* BorderControl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BorderControl.entitlements; sourceTree = "<group>"; };
 		63938C692A38BD1200734619 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		63938C6F2A38BD2C00734619 /* com.azimgd.BorderControl.Network.systemextension */ = {isa = PBXFileReference; explicitFileType = "wrapper.system-extension"; includeInIndex = 0; path = com.azimgd.BorderControl.Network.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
-		63938C722A38BD2C00734619 /* AppProxyProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppProxyProvider.h; sourceTree = "<group>"; };
-		63938C732A38BD2C00734619 /* AppProxyProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppProxyProvider.m; sourceTree = "<group>"; };
+		63938C722A38BD2C00734619 /* AppFilterProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppFilterProvider.h; sourceTree = "<group>"; };
+		63938C732A38BD2C00734619 /* AppFilterProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppFilterProvider.m; sourceTree = "<group>"; };
 		63938C752A38BD2C00734619 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		63938C772A38BD2C00734619 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63938C782A38BD2C00734619 /* Network.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Network.entitlements; sourceTree = "<group>"; };
@@ -142,8 +142,8 @@
 		63938C712A38BD2C00734619 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				63938C722A38BD2C00734619 /* AppProxyProvider.h */,
-				63938C732A38BD2C00734619 /* AppProxyProvider.m */,
+				63938C722A38BD2C00734619 /* AppFilterProvider.h */,
+				63938C732A38BD2C00734619 /* AppFilterProvider.m */,
 				63938C752A38BD2C00734619 /* main.m */,
 				63938C772A38BD2C00734619 /* Info.plist */,
 				63938C782A38BD2C00734619 /* Network.entitlements */,
@@ -277,7 +277,7 @@
 				63938C872A38BE4D00734619 /* NetworkExtension.m in Sources */,
 				63938C832A38BD8500734619 /* NetworkCommunication.m in Sources */,
 				63938C762A38BD2C00734619 /* main.m in Sources */,
-				63938C742A38BD2C00734619 /* AppProxyProvider.m in Sources */,
+				63938C742A38BD2C00734619 /* AppFilterProvider.m in Sources */,
 				63938C912A39CD7A00734619 /* ExtensionBundle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -32,8 +32,6 @@ static NetworkExtension *sharedInstance = nil;
   
   systemRequest.delegate = self;
   [OSSystemExtensionManager.sharedManager submitRequest:systemRequest];
-  
-  NSLog(@"[#bordercontrol] %@", extensionBundleId);
 }
 
 #pragma OSSystemExtensionRequestDelegate
@@ -42,29 +40,17 @@ static NetworkExtension *sharedInstance = nil;
   actionForReplacingExtension:(nonnull OSSystemExtensionProperties *)existing
   withExtension:(nonnull OSSystemExtensionProperties *)ext
 {
-  NSLog(@"[#bordercontrol] -> network filter activation requested");
-
   return OSSystemExtensionReplacementActionReplace;
 }
 
 - (void)request:(nonnull OSSystemExtensionRequest *)request
   didFailWithError:(nonnull NSError *)error
 {
-  NSLog(@"[#bordercontrol] -> network filter activation request failed %@", error);
 }
 
 - (void)request:(nonnull OSSystemExtensionRequest *)request didFinishWithResult:(OSSystemExtensionRequestResult)result
 {
-  NSLog(@"[#bordercontrol] -> network filter activation completed");
-  
   [NEFilterManager.sharedManager loadFromPreferencesWithCompletionHandler:^(NSError * _Nullable error) {
-    if (nil != error && YES != [NSProcessInfo.processInfo.arguments containsObject:@"-json"])
-    {
-      NSLog(@"[#bordercontrol] -> network filter extension settings fetch failed");
-    } else {
-      NSLog(@"[#bordercontrol] -> network filter extension settings fetch succeeded");
-    }
-    
     NSString *extensionBundleId = [[ExtensionBundle shared] extensionBundle:[NSBundle mainBundle]].bundleIdentifier;
 
     NEFilterProviderConfiguration* configuration = [[NEFilterProviderConfiguration alloc] init];
@@ -78,17 +64,11 @@ static NetworkExtension *sharedInstance = nil;
     NEFilterManager.sharedManager.providerConfiguration = configuration;
 
     [NEFilterManager.sharedManager saveToPreferencesWithCompletionHandler:^(NSError * _Nullable error) {
-      if (nil != error && YES != [NSProcessInfo.processInfo.arguments containsObject:@"-json"]) {
-        NSLog(@"[#bordercontrol] -> network filter extension settings save failed");
-      } else {
-        NSLog(@"[#bordercontrol] -> network filter extension settings save succeeded");
-      }
     }];
   }];
 }
 
 - (void)requestNeedsUserApproval:(nonnull OSSystemExtensionRequest *)request {
-  NSLog(@"[#bordercontrol] -> network filter extension approval finished");
 }
 
 @end

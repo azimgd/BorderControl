@@ -33,10 +33,6 @@ int main(int argc, const char * argv[]) {
       completionHandler:^(BOOL success) {
         dispatch_async(dispatch_get_main_queue(), ^{
           NSLog(@"[#bordercontrol]: xpc connection was established");
-          
-          [[NetworkCommunication shared] logger:@"long-message-string" responseHandler:^(BOOL result) {
-            
-          }];
         });
       }];
   }
