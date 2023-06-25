@@ -23,7 +23,7 @@
 @interface NetworkCommunication : NSObject<NSXPCListenerDelegate>
 
 @property (nonatomic, strong) NSXPCListener *listener;
-@property (nonatomic, strong) NSXPCConnection *currentConnection;
+@property (nonatomic, strong) NSXPCConnection *connection;
 @property (nonatomic, weak) id<HostCommunication> delegate;
 @property (class, nonatomic, readonly) NetworkCommunication *shared;
 

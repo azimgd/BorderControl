@@ -21,6 +21,10 @@ static NetworkCommunication *sharedInstance = nil;
   return sharedInstance;
 }
 
+- (void)register:(void (^)(BOOL))completionHandler {
+  completionHandler(YES);
+}
+
 - (void)startListener {
   NSString *machServiceName = [[ExtensionBundle shared] extensionBundleMachService:[NSBundle mainBundle]];
   NSXPCListener *newListener = [[NSXPCListener alloc] initWithMachServiceName:machServiceName];
@@ -32,90 +36,82 @@ static NetworkCommunication *sharedInstance = nil;
 - (void)registerWithExtension:(NSBundle *)bundle
   delegate:(id<HostCommunication>)delegate
   completionHandler:(void (^)(BOOL))completionHandler {
-    self.delegate = delegate;
+  self.delegate = delegate;
 
-    if (self.currentConnection) {
-      NSLog(@"Already registered with the provider");
-      completionHandler(YES);
-      return;
-    }
+  if (self.connection) {
+    completionHandler(YES);
+    return;
+  }
 
-    NSString *machServiceName = [[ExtensionBundle shared] extensionBundleMachService:bundle];
-    NSXPCConnection *newConnection = [[NSXPCConnection alloc] initWithMachServiceName:machServiceName options:0];
+  NSString *machServiceName = [[ExtensionBundle shared] extensionBundleMachService:bundle];
+  NSXPCConnection *newConnection = [[NSXPCConnection alloc] initWithMachServiceName:machServiceName options:0];
 
-    // The exported object is the delegate.
-    NSXPCInterface *exportedInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HostCommunication)];
-    newConnection.exportedInterface = exportedInterface;
-    newConnection.exportedObject = delegate;
+  // The exported object is the delegate.
+  NSXPCInterface *exportedInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HostCommunication)];
+  newConnection.exportedInterface = exportedInterface;
+  newConnection.exportedObject = delegate;
 
-    // The remote object is the provider's NetworkConnection instance.
-    NSXPCInterface *remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(ExtensionCommunication)];
-    newConnection.remoteObjectInterface = remoteObjectInterface;
+  // The remote object is the provider's NetworkConnection instance.
+  NSXPCInterface *remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(ExtensionCommunication)];
+  newConnection.remoteObjectInterface = remoteObjectInterface;
 
-    self.currentConnection = newConnection;
-    [newConnection resume];
+  self.connection = newConnection;
+  [newConnection resume];
 
-    id<ExtensionCommunication> extensionCommunication = (id<ExtensionCommunication>)[
-      newConnection
-      remoteObjectProxyWithErrorHandler:^(NSError *registerError) {
-        [self.currentConnection invalidate];
-        self.currentConnection = nil;
-        completionHandler(NO);
-    }];
+  id<ExtensionCommunication> extensionCommunication = (id<ExtensionCommunication>)[
+    newConnection
+    remoteObjectProxyWithErrorHandler:^(NSError *error) {
+      [self.connection invalidate];
+      self.connection = nil;
+      completionHandler(NO);
+  }];
 
-    if (!extensionCommunication) {
-      @throw [NSException
-        exceptionWithName:NSInternalInconsistencyException
-        reason:@"Failed to create a remote object proxy for the provider"
-        userInfo:nil];
-    }
-    
-    [extensionCommunication register:^(BOOL success) {
-      completionHandler(success);
-    }];
+  if (!extensionCommunication) {
+    @throw [NSException
+      exceptionWithName:NSInternalInconsistencyException
+      reason:@"Failed to create a remote object proxy for the provider"
+      userInfo:nil];
+  }
+  
+  [extensionCommunication register:^(BOOL success) {
+    completionHandler(success);
+  }];
 }
 
 - (BOOL)listener:(NSXPCListener *)listener shouldAcceptNewConnection:(NSXPCConnection *)newConnection {
-    // The exported object is this NetworkConnection instance.
-    NSXPCInterface *exportedInterface = [NSXPCInterface interfaceWithProtocol:@protocol(ExtensionCommunication)];
-    newConnection.exportedInterface = exportedInterface;
-    newConnection.exportedObject = self;
+  // The exported object is this NetworkConnection instance.
+  NSXPCInterface *exportedInterface = [NSXPCInterface interfaceWithProtocol:@protocol(ExtensionCommunication)];
+  newConnection.exportedInterface = exportedInterface;
+  newConnection.exportedObject = self;
 
-    // The remote object is the delegate of the app's NetworkConnection instance.
-    NSXPCInterface *remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HostCommunication)];
-    newConnection.remoteObjectInterface = remoteObjectInterface;
+  // The remote object is the delegate of the app's NetworkConnection instance.
+  NSXPCInterface *remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HostCommunication)];
+  newConnection.remoteObjectInterface = remoteObjectInterface;
 
-    newConnection.invalidationHandler = ^{
-      self.currentConnection = nil;
-    };
+  newConnection.invalidationHandler = ^{
+    self.connection = nil;
+  };
 
-    newConnection.interruptionHandler = ^{
-      self.currentConnection = nil;
-    };
+  newConnection.interruptionHandler = ^{
+    self.connection = nil;
+  };
 
-    self.currentConnection = newConnection;
-    [newConnection resume];
+  self.connection = newConnection;
+  [newConnection resume];
 
-    return YES;
-}
-
-- (void)register:(void (^)(BOOL))completionHandler {
-    NSLog(@"App registered");
-    completionHandler(YES);
+  return YES;
 }
 
 - (BOOL)logger:(NSString *)payload responseHandler:(void (^)(BOOL))responseHandler {
-  if (!self.currentConnection) {
-    NSLog(@"Cannot prompt user because the app isn't registered");
+  if (!self.connection) {
     return NO;
   }
   
   id<HostCommunication> hostCommunication = (id<HostCommunication>)[
-    self.currentConnection
-    remoteObjectProxyWithErrorHandler:^(NSError *promptError) {
-    NSLog(@"Failed to prompt the user: %@", promptError.localizedDescription);
-    [self.currentConnection invalidate];
-    self.currentConnection = nil;
+    self.connection
+    remoteObjectProxyWithErrorHandler:^(NSError *error) {
+    [self.connection invalidate];
+    self.connection = nil;
     responseHandler(NO);
   }];
 
@@ -127,7 +123,9 @@ static NetworkCommunication *sharedInstance = nil;
   }
 
   [hostCommunication register:^(BOOL success) {
-    responseHandler(success);
+    [self.delegate register:^(BOOL success) {
+      responseHandler(success);
+    }];
   }];
   
   return YES;

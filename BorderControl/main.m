@@ -17,6 +17,7 @@
 @implementation NetworkDelegate
 
 - (void)register:(void (^)(BOOL))completionHandler {
+  NSLog(@"[#bordercontrol]: xpc logs were delivered");
 }
 
 @end
@@ -34,7 +35,7 @@ int main(int argc, const char * argv[]) {
           NSLog(@"[#bordercontrol]: xpc connection was established");
           
           [[NetworkCommunication shared] logger:@"long-message-string" responseHandler:^(BOOL result) {
-            NSLog(@"[#bordercontrol]: xpc logs were delivered");
+            
           }];
         });
       }];
