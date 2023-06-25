@@ -24,6 +24,8 @@
 		639D73682A46C3EC00002B3A /* SocketRocket.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 639D73672A46C3EC00002B3A /* SocketRocket.xcframework */; };
 		639D736D2A46C47F00002B3A /* SocketRocket.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 639D73672A46C3EC00002B3A /* SocketRocket.xcframework */; };
 		639D736E2A46C47F00002B3A /* SocketRocket.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 639D73672A46C3EC00002B3A /* SocketRocket.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		639D73722A46C5E700002B3A /* NetworkCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 639D73712A46C5E700002B3A /* NetworkCommunication.m */; };
+		639D73732A46C5E700002B3A /* NetworkCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 639D73712A46C5E700002B3A /* NetworkCommunication.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,8 @@
 		63938C8E2A39CD6B00734619 /* ExtensionBundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtensionBundle.h; sourceTree = "<group>"; };
 		63938C8F2A39CD7A00734619 /* ExtensionBundle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtensionBundle.m; sourceTree = "<group>"; };
 		639D73672A46C3EC00002B3A /* SocketRocket.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SocketRocket.xcframework; path = Carthage/Build/SocketRocket.xcframework; sourceTree = "<group>"; };
+		639D73702A46C5CD00002B3A /* NetworkCommunication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkCommunication.h; sourceTree = "<group>"; };
+		639D73712A46C5E700002B3A /* NetworkCommunication.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkCommunication.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +165,8 @@
 				63938C752A38BD2C00734619 /* main.m */,
 				63938C772A38BD2C00734619 /* Info.plist */,
 				63938C782A38BD2C00734619 /* Network.entitlements */,
+				639D73702A46C5CD00002B3A /* NetworkCommunication.h */,
+				639D73712A46C5E700002B3A /* NetworkCommunication.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -277,6 +283,7 @@
 				63938C5A2A38BCD600734619 /* ViewController.m in Sources */,
 				63938C612A38BCD800734619 /* main.m in Sources */,
 				63938C902A39CD7A00734619 /* ExtensionBundle.m in Sources */,
+				639D73722A46C5E700002B3A /* NetworkCommunication.m in Sources */,
 				63938C572A38BCD600734619 /* AppDelegate.m in Sources */,
 				63938C862A38BE4D00734619 /* NetworkExtension.m in Sources */,
 			);
@@ -290,6 +297,7 @@
 				63938C762A38BD2C00734619 /* main.m in Sources */,
 				63938C742A38BD2C00734619 /* AppFilterProvider.m in Sources */,
 				63938C912A39CD7A00734619 /* ExtensionBundle.m in Sources */,
+				639D73732A46C5E700002B3A /* NetworkCommunication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

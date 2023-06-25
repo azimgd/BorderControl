@@ -6,11 +6,17 @@
 //
 
 #import "AppFilterProvider.h"
+#import "NetworkCommunication.h"
 
 @implementation AppFilterProvider
 
+static NetworkCommunication *networkCommunication;
+
 - (void)startFilterWithCompletionHandler:(void (^)(NSError * _Nullable))completionHandler
 {
+  networkCommunication = [NetworkCommunication new];
+  [networkCommunication connect];
+  
   NENetworkRule* networkRule = [
     [NENetworkRule alloc]
     initWithRemoteNetwork:nil
@@ -38,6 +44,7 @@
 
 - (void)stopFilterWithReason:(NEProviderStopReason)reason completionHandler:(void (^)(void))completionHandler
 {
+  [networkCommunication disconnect];
   completionHandler();
 }
 
@@ -45,6 +52,12 @@
   NEFilterSocketFlow *socketFlow = (NEFilterSocketFlow*)flow;
   NWHostEndpoint *remoteEndpoint = (NWHostEndpoint*)socketFlow.remoteEndpoint;
 
+  NSDictionary *payload = @{
+    @"hostname": remoteEndpoint.hostname,
+    @"port": remoteEndpoint.port,
+  };
+  [networkCommunication dispatch:payload];
+  
   return [NEFilterNewFlowVerdict allowVerdict];
 }
 
