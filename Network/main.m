@@ -15,7 +15,9 @@ int main(int argc, char *argv[])
   @autoreleasepool {
     [NEProvider startSystemExtensionMode];
     NSString *machService = [[ExtensionBundle shared] extensionBundleMachService:[NSBundle mainBundle]];
-    [[NetworkCommunication shared] startListener:machService];
+    [[NetworkCommunication shared] startListener:machService callback:^(NSError *error) {
+      NSLog(@"#machService: daemon callback return %@", error);
+    }];
   }
 
   dispatch_main();

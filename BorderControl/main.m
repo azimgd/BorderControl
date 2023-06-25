@@ -16,10 +16,10 @@ int main(int argc, const char * argv[]) {
     
     NSBundle *extensionBundle = [[ExtensionBundle shared] extensionBundle:[NSBundle mainBundle]];
     NSString *machService = [[ExtensionBundle shared] extensionBundleMachService:extensionBundle];
-    [[NetworkCommunication shared] startConnection:machService];
-
-    [[NetworkCommunication shared] dispatcher:@"str" callback:^(NSString *payload) {
-      NSLog(@"#machService: %@", payload);
+    [[NetworkCommunication shared] startConnection:machService callback:^(NSError *error) {
+      [[NetworkCommunication shared] dispatcher:@"payload" callback:^(NSString *payload) {
+        NSLog(@"#machService: host callback return %@", payload);
+      }];
     }];
   }
   return NSApplicationMain(argc, argv);

@@ -23,6 +23,7 @@
 @implementation NetworkCommunication
 
 static NetworkCommunication *sharedInstance = nil;
+static void (^startListenerCallback)(NSError *);
 
 + (NetworkCommunication *)shared {
   static dispatch_once_t onceToken;
@@ -32,14 +33,16 @@ static NetworkCommunication *sharedInstance = nil;
   return sharedInstance;
 }
 
-- (void)startListener:(NSString *)machService {
+- (void)startListener:(NSString *)machService callback:(void (^)(NSError *))callback {
   NSXPCListener *listener = [[NSXPCListener alloc] initWithMachServiceName:machService];
   listener.delegate = self;
   [listener resume];
   self.listener = listener;
+  startListenerCallback = callback;
+  callback(nil);
 }
 
-- (void)startConnection:(NSString *)machService {
+- (void)startConnection:(NSString *)machService callback:(void (^)(NSError *))callback {
   if (self.connection) {
     @throw [NSException
       exceptionWithName:NSInternalInconsistencyException
@@ -74,6 +77,7 @@ static NetworkCommunication *sharedInstance = nil;
       reason:@"Failed to create a remote object proxy for the extension"
       userInfo:nil];
   }
+  callback(nil);
 }
 
 - (BOOL)listener:(NSXPCListener *)listener shouldAcceptNewConnection:(NSXPCConnection *)connection {
@@ -96,6 +100,8 @@ static NetworkCommunication *sharedInstance = nil;
 
   self.connection = connection;
   [connection resume];
+  
+  startListenerCallback(nil);
   
   return YES;
 }
