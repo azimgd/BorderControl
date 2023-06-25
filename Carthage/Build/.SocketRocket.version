@@ -1,42 +1,11 @@
 {
+  "commitish" : "0.6.0",
   "Mac" : [
     {
-      "hash" : "8666478d37db058aa25f27979ac80504333faed594f1fdc621b3cbb7f5051df2",
+      "hash" : "2887949051e5795802e367c23c0380f15dccf563b49357e0ff0d1ab7b73cfb36",
       "name" : "SocketRocket",
       "container" : "SocketRocket.xcframework",
       "identifier" : "macos-arm64_x86_64"
-    }
-  ],
-  "watchOS" : [
-
-  ],
-  "tvOS" : [
-    {
-      "hash" : "da34a02b8bae7c50da4c66654146587c3d716e8936445f61866cdd75d75672b5",
-      "name" : "SocketRocket",
-      "container" : "SocketRocket.xcframework",
-      "identifier" : "tvos-arm64_x86_64-simulator"
-    },
-    {
-      "hash" : "45161e46ce81f8c00cf6b890903d07c2a1911dd2796a9b1e7308d9a1b693e3e4",
-      "name" : "SocketRocket",
-      "container" : "SocketRocket.xcframework",
-      "identifier" : "tvos-arm64"
-    }
-  ],
-  "commitish" : "0.6.0",
-  "iOS" : [
-    {
-      "hash" : "f604fce8624636b252db3971e72730795de2e4a96898776fc2cf92d907768920",
-      "name" : "SocketRocket",
-      "container" : "SocketRocket.xcframework",
-      "identifier" : "ios-arm64_i386_x86_64-simulator"
-    },
-    {
-      "hash" : "14d7b8ac02ef7399e1923229c3c560963fc8ad6c146927f021a3cd5c1bb67d53",
-      "name" : "SocketRocket",
-      "container" : "SocketRocket.xcframework",
-      "identifier" : "ios-arm64_armv7"
     }
   ]
 }

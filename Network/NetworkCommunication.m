@@ -12,7 +12,7 @@
 @implementation NetworkCommunication
 
 - (void)connect {
-  self.webSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:@"ws://localhost:7990"]];
+  self.webSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:@"ws://localhost:8080"]];
   self.webSocket.delegate = self;
   [self.webSocket open];
 }
