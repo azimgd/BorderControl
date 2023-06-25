@@ -11,7 +11,7 @@
 
 int main(int argc, const char * argv[]) {
   @autoreleasepool {
-    [[NetworkExtension shared] install];
+//    [[NetworkExtension shared] install];
     [[SecurityExtension shared] install];
   }
   return NSApplicationMain(argc, argv);

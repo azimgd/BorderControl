@@ -13,6 +13,9 @@
 		6378C6292A47B87D00E1D2C4 /* SecurityExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6378C6282A47B87D00E1D2C4 /* SecurityExtension.m */; };
 		6378C62C2A47EC3300E1D2C4 /* SocketRocket.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 639D73672A46C3EC00002B3A /* SocketRocket.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6378C62E2A47EC5000E1D2C4 /* SocketRocket.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 639D73672A46C3EC00002B3A /* SocketRocket.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6378C6332A47F45B00E1D2C4 /* SecurityCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6378C6302A47F45600E1D2C4 /* SecurityCommunication.m */; };
+		6378C6362A47F52E00E1D2C4 /* EndpointSecurityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6378C6352A47F52E00E1D2C4 /* EndpointSecurityProvider.m */; };
+		6378C6372A47F6F100E1D2C4 /* SocketRocket.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 639D73672A46C3EC00002B3A /* SocketRocket.xcframework */; };
 		63938C572A38BCD600734619 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C562A38BCD600734619 /* AppDelegate.m */; };
 		63938C5A2A38BCD600734619 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C592A38BCD600734619 /* ViewController.m */; };
 		63938C5C2A38BCD800734619 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63938C5B2A38BCD800734619 /* Assets.xcassets */; };
@@ -24,7 +27,6 @@
 		63938C762A38BD2C00734619 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C752A38BD2C00734619 /* main.m */; };
 		63938C7B2A38BD2C00734619 /* com.azimgd.BorderControl.Network.systemextension in Embed System Extensions */ = {isa = PBXBuildFile; fileRef = 63938C6F2A38BD2C00734619 /* com.azimgd.BorderControl.Network.systemextension */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		63938C862A38BE4D00734619 /* NetworkExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C852A38BE4D00734619 /* NetworkExtension.m */; };
-		63938C872A38BE4D00734619 /* NetworkExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C852A38BE4D00734619 /* NetworkExtension.m */; };
 		639D73682A46C3EC00002B3A /* SocketRocket.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 639D73672A46C3EC00002B3A /* SocketRocket.xcframework */; };
 		639D736D2A46C47F00002B3A /* SocketRocket.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 639D73672A46C3EC00002B3A /* SocketRocket.xcframework */; };
 		639D736E2A46C47F00002B3A /* SocketRocket.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 639D73672A46C3EC00002B3A /* SocketRocket.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -106,6 +108,10 @@
 		6378C6272A47B86D00E1D2C4 /* SecurityExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecurityExtension.h; sourceTree = "<group>"; };
 		6378C6282A47B87D00E1D2C4 /* SecurityExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecurityExtension.m; sourceTree = "<group>"; };
 		6378C62F2A47F1A400E1D2C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6378C6302A47F45600E1D2C4 /* SecurityCommunication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecurityCommunication.m; path = Security/SecurityCommunication.m; sourceTree = SOURCE_ROOT; };
+		6378C6312A47F45600E1D2C4 /* SecurityCommunication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecurityCommunication.h; path = Security/SecurityCommunication.h; sourceTree = SOURCE_ROOT; };
+		6378C6342A47F52200E1D2C4 /* EndpointSecurityProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EndpointSecurityProvider.h; sourceTree = "<group>"; };
+		6378C6352A47F52E00E1D2C4 /* EndpointSecurityProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EndpointSecurityProvider.m; sourceTree = "<group>"; };
 		63938C522A38BCD600734619 /* BorderControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BorderControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63938C552A38BCD600734619 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		63938C562A38BCD600734619 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -135,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6378C61B2A47B85100E1D2C4 /* libEndpointSecurity.tbd in Frameworks */,
+				6378C6372A47F6F100E1D2C4 /* SocketRocket.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +172,10 @@
 				6378C61D2A47B85100E1D2C4 /* main.m */,
 				6378C61F2A47B85100E1D2C4 /* Info.plist */,
 				6378C6202A47B85100E1D2C4 /* Security.entitlements */,
+				6378C6312A47F45600E1D2C4 /* SecurityCommunication.h */,
+				6378C6302A47F45600E1D2C4 /* SecurityCommunication.m */,
+				6378C6342A47F52200E1D2C4 /* EndpointSecurityProvider.h */,
+				6378C6352A47F52E00E1D2C4 /* EndpointSecurityProvider.m */,
 			);
 			path = Security;
 			sourceTree = "<group>";
@@ -365,6 +376,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6378C6332A47F45B00E1D2C4 /* SecurityCommunication.m in Sources */,
+				6378C6362A47F52E00E1D2C4 /* EndpointSecurityProvider.m in Sources */,
 				6378C61E2A47B85100E1D2C4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,7 +399,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63938C872A38BE4D00734619 /* NetworkExtension.m in Sources */,
 				63938C762A38BD2C00734619 /* main.m in Sources */,
 				63938C742A38BD2C00734619 /* AppFilterProvider.m in Sources */,
 				639D73732A46C5E700002B3A /* NetworkCommunication.m in Sources */,
