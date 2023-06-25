@@ -21,6 +21,8 @@
 		63938C832A38BD8500734619 /* NetworkCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C812A38BD8500734619 /* NetworkCommunication.m */; };
 		63938C862A38BE4D00734619 /* NetworkExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C852A38BE4D00734619 /* NetworkExtension.m */; };
 		63938C872A38BE4D00734619 /* NetworkExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C852A38BE4D00734619 /* NetworkExtension.m */; };
+		63938C902A39CD7A00734619 /* ExtensionBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C8F2A39CD7A00734619 /* ExtensionBundle.m */; };
+		63938C912A39CD7A00734619 /* ExtensionBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C8F2A39CD7A00734619 /* ExtensionBundle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		63938C812A38BD8500734619 /* NetworkCommunication.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkCommunication.m; sourceTree = "<group>"; };
 		63938C842A38BE3E00734619 /* NetworkExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkExtension.h; sourceTree = "<group>"; };
 		63938C852A38BE4D00734619 /* NetworkExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkExtension.m; sourceTree = "<group>"; };
+		63938C8E2A39CD6B00734619 /* ExtensionBundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtensionBundle.h; sourceTree = "<group>"; };
+		63938C8F2A39CD7A00734619 /* ExtensionBundle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtensionBundle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,7 @@
 		63938C492A38BCD600734619 = {
 			isa = PBXGroup;
 			children = (
+				63938C8D2A39CD5A00734619 /* Shared */,
 				63938C542A38BCD600734619 /* BorderControl */,
 				63938C712A38BD2C00734619 /* Network */,
 				63938C532A38BCD600734619 /* Products */,
@@ -146,6 +151,15 @@
 				63938C812A38BD8500734619 /* NetworkCommunication.m */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		63938C8D2A39CD5A00734619 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				63938C8E2A39CD6B00734619 /* ExtensionBundle.h */,
+				63938C8F2A39CD7A00734619 /* ExtensionBundle.m */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,6 +264,7 @@
 				63938C5A2A38BCD600734619 /* ViewController.m in Sources */,
 				63938C822A38BD8500734619 /* NetworkCommunication.m in Sources */,
 				63938C612A38BCD800734619 /* main.m in Sources */,
+				63938C902A39CD7A00734619 /* ExtensionBundle.m in Sources */,
 				63938C572A38BCD600734619 /* AppDelegate.m in Sources */,
 				63938C862A38BE4D00734619 /* NetworkExtension.m in Sources */,
 			);
@@ -263,6 +278,7 @@
 				63938C832A38BD8500734619 /* NetworkCommunication.m in Sources */,
 				63938C762A38BD2C00734619 /* main.m in Sources */,
 				63938C742A38BD2C00734619 /* AppProxyProvider.m in Sources */,
+				63938C912A39CD7A00734619 /* ExtensionBundle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

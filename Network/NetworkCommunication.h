@@ -27,8 +27,6 @@
 @property (nonatomic, weak) id<AppCommunication> delegate;
 @property (class, nonatomic, readonly) NetworkCommunication *shared;
 
-- (NSString *)extensionMachServiceNameFromBundle:(NSBundle *)bundle;
-
 - (void)startListener;
 
 - (void)registerWithExtension:(NSBundle *)bundle
@@ -37,8 +35,6 @@
 
 - (BOOL)logger:(NSString *)payload
   responseHandler:(void (^)(BOOL))responseHandler;
-
-- (NSBundle *)extensionBundle;
 
 @end
 

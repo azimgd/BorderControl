@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "NetworkExtension.h"
+#import "ExtensionBundle.h"
 
 @implementation NetworkExtension
 
@@ -22,7 +23,7 @@ static NetworkExtension *sharedInstance = nil;
 
 - (void)install
 {
-  NSString *extensionBundleId = [self extensionBundle].bundleIdentifier;
+  NSString *extensionBundleId = [[ExtensionBundle shared] extensionBundle].bundleIdentifier;
   
   OSSystemExtensionRequest *systemRequest = [OSSystemExtensionRequest
     activationRequestForExtension:extensionBundleId
@@ -33,65 +34,6 @@ static NetworkExtension *sharedInstance = nil;
   [OSSystemExtensionManager.sharedManager submitRequest:systemRequest];
   
   NSLog(@"[#bordercontrol] %@", extensionBundleId);
-}
-
-- (NSString *)extensionMachServiceNameFromBundle:(NSBundle *)bundle {
-  NSDictionary *networkExtensionKeys = [bundle objectForInfoDictionaryKey:@"NetworkExtension"];
-  NSString *machServiceName = networkExtensionKeys[@"NEMachServiceName"];
-  
-  if (!machServiceName) {
-    [NSException
-      raise:@"MissingMachServiceName"
-      format:@"Mach service name is missing from the Info.plist"];
-  }
-  
-  return machServiceName;
-}
-
-- (NSBundle *)extensionBundle {
-  NSURL *bundleUrl = [[NSBundle mainBundle] bundleURL];
-  NSURL *extensionsDirectoryUrl = [NSURL
-    fileURLWithPath:@"Contents/Library/SystemExtensions"
-    relativeToURL:bundleUrl];
-  NSArray<NSURL *> *extensionUrls;
-  NSError *error;
-
-  extensionUrls = [[NSFileManager defaultManager]
-    contentsOfDirectoryAtURL:extensionsDirectoryUrl
-    includingPropertiesForKeys:nil
-    options:NSDirectoryEnumerationSkipsHiddenFiles
-    error:&error];
-
-  if (error) {
-    NSString *errorMessage = [NSString
-      stringWithFormat:@"[#bordercontrol] %@: %@",
-      extensionsDirectoryUrl.absoluteString,
-      error.localizedDescription];
-    @throw [NSException
-      exceptionWithName:NSGenericException
-      reason:errorMessage
-      userInfo:nil];
-  }
-
-  if (extensionUrls.count == 0) {
-    @throw [NSException
-      exceptionWithName:NSGenericException
-      reason:@"[#bordercontrol]"
-      userInfo:nil];
-  }
-
-  NSBundle *extensionBundle = [NSBundle bundleWithURL:extensionUrls.firstObject];
-  if (!extensionBundle) {
-    NSString *errorMessage = [NSString
-      stringWithFormat:@"[#bordercontrol] %@",
-      extensionUrls.firstObject.absoluteString];
-    @throw [NSException
-      exceptionWithName:NSGenericException
-      reason:errorMessage
-      userInfo:nil];
-  }
-
-  return extensionBundle;
 }
 
 #pragma OSSystemExtensionRequestDelegate
@@ -123,7 +65,7 @@ static NetworkExtension *sharedInstance = nil;
       NSLog(@"[#bordercontrol] -> network filter extension settings fetch succeeded");
     }
     
-    NSString *extensionBundleId = [self extensionBundle].bundleIdentifier;
+    NSString *extensionBundleId = [[ExtensionBundle shared] extensionBundle].bundleIdentifier;
 
     NEFilterProviderConfiguration* configuration = [[NEFilterProviderConfiguration alloc] init];
     configuration.filterPackets = false;

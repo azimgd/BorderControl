@@ -8,6 +8,7 @@
 #import <Cocoa/Cocoa.h>
 #import "NetworkExtension.h"
 #import "NetworkCommunication.h"
+#import "ExtensionBundle.h"
 
 int main(int argc, const char * argv[]) {
   @autoreleasepool {
@@ -16,13 +17,13 @@ int main(int argc, const char * argv[]) {
     NSObject *delegate = [NSObject new];
     NetworkCommunication *sharedConnection = [NetworkCommunication shared];
     [sharedConnection
-      registerWithExtension:[sharedConnection extensionBundle]
+      registerWithExtension:[[ExtensionBundle shared] extensionBundle]
       delegate:delegate
       completionHandler:^(BOOL success) {
         dispatch_async(dispatch_get_main_queue(), ^{
           NSLog(@"#bordercontrol: xpc connection was established");
           
-          [[NetworkCommunication shared] logger:@"long-message-string" responseHandler:^(BOOL) {
+          [[NetworkCommunication shared] logger:@"long-message-string" responseHandler:^(BOOL result) {
             NSLog(@"#bordercontrol: xpc logs were delivered");
           }];
         });
