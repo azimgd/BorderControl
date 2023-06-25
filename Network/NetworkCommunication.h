@@ -12,11 +12,11 @@
 #import <NetworkExtension/NetworkExtension.h>
 #import "NetworkCommunication.h"
 
-@protocol AppCommunication <NSObject>
+@protocol HostCommunication <NSObject>
   - (void)register:(void (^)(BOOL))completionHandler;
 @end
 
-@protocol ProviderCommunication <NSObject>
+@protocol ExtensionCommunication <NSObject>
   - (void)register:(void (^)(BOOL))completionHandler;
 @end
 
@@ -24,13 +24,13 @@
 
 @property (nonatomic, strong) NSXPCListener *listener;
 @property (nonatomic, strong) NSXPCConnection *currentConnection;
-@property (nonatomic, weak) id<AppCommunication> delegate;
+@property (nonatomic, weak) id<HostCommunication> delegate;
 @property (class, nonatomic, readonly) NetworkCommunication *shared;
 
 - (void)startListener;
 
 - (void)registerWithExtension:(NSBundle *)bundle
-  delegate:(id<AppCommunication>)delegate
+  delegate:(id<HostCommunication>)delegate
   completionHandler:(void (^)(BOOL))completionHandler;
 
 - (BOOL)logger:(NSString *)payload

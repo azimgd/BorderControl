@@ -21,7 +21,7 @@
 - (void)handleAppMessage:(NSData *)messageData completionHandler:(void (^)(NSData *))completionHandler {
   // Add code here to handle the message.
   if (completionHandler != nil) {
-      completionHandler(messageData);
+    completionHandler(messageData);
   }
 }
 
