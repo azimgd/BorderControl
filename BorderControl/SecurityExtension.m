@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "SecurityExtension.h"
 
-NSString *const securityExtensionBundleId = @"B6BB88CAP5.com.azimgd.BorderControl.Security";
+NSString *const securityExtensionBundleId = @"com.azimgd.BorderControl.Security";
 
 @implementation SecurityExtension
 

@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "NetworkExtension.h"
 
-NSString *const networkExtensionBundleId = @"B6BB88CAP5.com.azimgd.BorderControl.Security";
+NSString *const networkExtensionBundleId = @"com.azimgd.BorderControl.Network";
 
 @implementation NetworkExtension
 
