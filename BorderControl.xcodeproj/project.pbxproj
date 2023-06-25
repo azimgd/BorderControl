@@ -21,6 +21,9 @@
 		63938C872A38BE4D00734619 /* NetworkExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C852A38BE4D00734619 /* NetworkExtension.m */; };
 		63938C902A39CD7A00734619 /* ExtensionBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C8F2A39CD7A00734619 /* ExtensionBundle.m */; };
 		63938C912A39CD7A00734619 /* ExtensionBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C8F2A39CD7A00734619 /* ExtensionBundle.m */; };
+		639D73682A46C3EC00002B3A /* SocketRocket.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 639D73672A46C3EC00002B3A /* SocketRocket.xcframework */; };
+		639D736D2A46C47F00002B3A /* SocketRocket.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 639D73672A46C3EC00002B3A /* SocketRocket.xcframework */; };
+		639D736E2A46C47F00002B3A /* SocketRocket.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 639D73672A46C3EC00002B3A /* SocketRocket.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +46,17 @@
 				63938C7B2A38BD2C00734619 /* com.azimgd.BorderControl.Network.systemextension in Embed System Extensions */,
 			);
 			name = "Embed System Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		639D736F2A46C47F00002B3A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				639D736E2A46C47F00002B3A /* SocketRocket.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -68,6 +82,7 @@
 		63938C852A38BE4D00734619 /* NetworkExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkExtension.m; sourceTree = "<group>"; };
 		63938C8E2A39CD6B00734619 /* ExtensionBundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtensionBundle.h; sourceTree = "<group>"; };
 		63938C8F2A39CD7A00734619 /* ExtensionBundle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtensionBundle.m; sourceTree = "<group>"; };
+		639D73672A46C3EC00002B3A /* SocketRocket.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SocketRocket.xcframework; path = Carthage/Build/SocketRocket.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				639D73682A46C3EC00002B3A /* SocketRocket.xcframework in Frameworks */,
 				63938C6A2A38BD1200734619 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				639D736D2A46C47F00002B3A /* SocketRocket.xcframework in Frameworks */,
 				63938C702A38BD2C00734619 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,6 +147,7 @@
 		63938C682A38BD1200734619 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				639D73672A46C3EC00002B3A /* SocketRocket.xcframework */,
 				63938C692A38BD1200734619 /* NetworkExtension.framework */,
 			);
 			name = Frameworks;
@@ -185,6 +203,7 @@
 				63938C6B2A38BD2C00734619 /* Sources */,
 				63938C6C2A38BD2C00734619 /* Frameworks */,
 				63938C6D2A38BD2C00734619 /* Resources */,
+				639D736F2A46C47F00002B3A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
