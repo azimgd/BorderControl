@@ -14,12 +14,12 @@
 
 // From Extension to Host
 @protocol HostCommunication <NSObject>
-  - (void)remoteDispatcher:(void (^)(NSString *))completionHandler;
+  - (void)remoteDispatcher:(void (^)(NSString *))callback;
 @end
 
 // From Host to Extension
 @protocol ExtensionCommunication <NSObject>
-  - (void)remoteDispatcher:(void (^)(NSString *))completionHandler;
+  - (void)remoteDispatcher:(void (^)(NSString *))callback;
 @end
 
 @interface NetworkCommunication : NSObject<NSXPCListenerDelegate>

@@ -9,6 +9,18 @@
 #import "NetworkCommunication.h"
 #import "ExtensionBundle.h"
 
+@interface NetworkCommunicationExtensionDelegate : NSObject<ExtensionCommunication>
+@end
+
+@implementation NetworkCommunicationExtensionDelegate
+
+- (void)remoteDispatcher:(void (^)(NSString *))callback {
+  NSString *payload = @"random payload";
+  callback(payload);
+}
+
+@end
+
 @implementation NetworkCommunication
 
 static NetworkCommunication *sharedInstance = nil;
@@ -21,17 +33,11 @@ static NetworkCommunication *sharedInstance = nil;
   return sharedInstance;
 }
 
-- (void)remoteDispatcher:(void (^)(NSString *))completionHandler {
-  NSString *payload = @"random payload";
-  completionHandler(payload);
-}
-
 - (void)startListener {
-  NSString *machServiceName = [[ExtensionBundle shared] extensionBundleMachService:[NSBundle mainBundle]];
-  NSXPCListener *newListener = [[NSXPCListener alloc] initWithMachServiceName:machServiceName];
-  newListener.delegate = self;
-  [newListener resume];
-  self.listener = newListener;
+  NSString *machService = [[ExtensionBundle shared] extensionBundleMachService:[NSBundle mainBundle]];
+  NSXPCListener *listener = [[NSXPCListener alloc] initWithMachServiceName:machService];
+  listener.delegate = self;
+  [listener resume];
 }
 
 - (void)startConnection:(NSBundle *)bundle {
@@ -42,13 +48,13 @@ static NetworkCommunication *sharedInstance = nil;
       userInfo:nil];
   }
 
-  NSString *machServiceName = [[ExtensionBundle shared] extensionBundleMachService:bundle];
-  NSXPCConnection *newConnection = [[NSXPCConnection alloc] initWithMachServiceName:machServiceName options:0];
+  NSString *machService = [[ExtensionBundle shared] extensionBundleMachService:bundle];
+  NSXPCConnection *newConnection = [[NSXPCConnection alloc] initWithMachServiceName:machService options:0];
 
   // The exported object is the delegate.
   NSXPCInterface *exportedInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HostCommunication)];
   newConnection.exportedInterface = exportedInterface;
-  newConnection.exportedObject = self;
+  newConnection.exportedObject = [NetworkCommunicationExtensionDelegate new];
 
   // The remote object is the extenion's NetworkCommunication instance.
   NSXPCInterface *remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(ExtensionCommunication)];
@@ -76,7 +82,7 @@ static NetworkCommunication *sharedInstance = nil;
   // The exported object is this NetworkCommunication instance.
   NSXPCInterface *exportedInterface = [NSXPCInterface interfaceWithProtocol:@protocol(ExtensionCommunication)];
   newConnection.exportedInterface = exportedInterface;
-  newConnection.exportedObject = self;
+  newConnection.exportedObject = [NetworkCommunicationExtensionDelegate new];
 
   // The remote object is the delegate of the app's NetworkConnection instance.
   NSXPCInterface *remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HostCommunication)];
