@@ -9,14 +9,6 @@
 
 @implementation AppFilterProvider
 
-- (instancetype)init
-{
-  if (self = [super init])
-  {
-  }
-  return self;
-}
-
 - (void)startFilterWithCompletionHandler:(void (^)(NSError * _Nullable))completionHandler
 {
   NENetworkRule* networkRule = [
@@ -42,8 +34,6 @@
   [self applySettings:filterSettings completionHandler:^(NSError * _Nullable error) {
     completionHandler(error);
   }];
-  
-  completionHandler(nil);
 }
 
 - (void)stopFilterWithReason:(NEProviderStopReason)reason completionHandler:(void (^)(void))completionHandler
@@ -51,7 +41,7 @@
   completionHandler();
 }
 
--(NEFilterNewFlowVerdict *)handleNewFlow:(NEFilterFlow *)flow {
+- (NEFilterNewFlowVerdict *)handleNewFlow:(NEFilterFlow *)flow {
   NEFilterSocketFlow *socketFlow = (NEFilterSocketFlow*)flow;
   NWHostEndpoint *remoteEndpoint = (NWHostEndpoint*)socketFlow.remoteEndpoint;
 
