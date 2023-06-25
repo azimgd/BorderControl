@@ -26,6 +26,7 @@
 		639D736E2A46C47F00002B3A /* SocketRocket.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 639D73672A46C3EC00002B3A /* SocketRocket.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		639D73722A46C5E700002B3A /* NetworkCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 639D73712A46C5E700002B3A /* NetworkCommunication.m */; };
 		639D73732A46C5E700002B3A /* NetworkCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 639D73712A46C5E700002B3A /* NetworkCommunication.m */; };
+		639D73752A46CD2900002B3A /* HostCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 639D73742A46CD2900002B3A /* HostCommunication.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,8 @@
 		639D73672A46C3EC00002B3A /* SocketRocket.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SocketRocket.xcframework; path = Carthage/Build/SocketRocket.xcframework; sourceTree = "<group>"; };
 		639D73702A46C5CD00002B3A /* NetworkCommunication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkCommunication.h; sourceTree = "<group>"; };
 		639D73712A46C5E700002B3A /* NetworkCommunication.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkCommunication.m; sourceTree = "<group>"; };
+		639D73742A46CD2900002B3A /* HostCommunication.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HostCommunication.m; sourceTree = "<group>"; };
+		639D73762A46CD3800002B3A /* HostCommunication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HostCommunication.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +147,8 @@
 				63938C622A38BCD800734619 /* BorderControl.entitlements */,
 				63938C842A38BE3E00734619 /* NetworkExtension.h */,
 				63938C852A38BE4D00734619 /* NetworkExtension.m */,
+				639D73742A46CD2900002B3A /* HostCommunication.m */,
+				639D73762A46CD3800002B3A /* HostCommunication.h */,
 			);
 			path = BorderControl;
 			sourceTree = "<group>";
@@ -282,6 +287,7 @@
 			files = (
 				63938C5A2A38BCD600734619 /* ViewController.m in Sources */,
 				63938C612A38BCD800734619 /* main.m in Sources */,
+				639D73752A46CD2900002B3A /* HostCommunication.m in Sources */,
 				63938C902A39CD7A00734619 /* ExtensionBundle.m in Sources */,
 				639D73722A46C5E700002B3A /* NetworkCommunication.m in Sources */,
 				63938C572A38BCD600734619 /* AppDelegate.m in Sources */,
