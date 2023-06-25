@@ -22,7 +22,7 @@ static NetworkCommunication *sharedInstance = nil;
 }
 
 - (void)startListener {
-  NSString *machServiceName = [[ExtensionBundle shared] extensionMachServiceNameFromBundle:NSBundle.mainBundle];
+  NSString *machServiceName = [[ExtensionBundle shared] extensionBundleMachService:[NSBundle mainBundle]];
   NSXPCListener *newListener = [[NSXPCListener alloc] initWithMachServiceName:machServiceName];
   newListener.delegate = self;
   [newListener resume];
@@ -40,7 +40,7 @@ static NetworkCommunication *sharedInstance = nil;
       return;
     }
 
-    NSString *machServiceName = [[ExtensionBundle shared] extensionMachServiceNameFromBundle:bundle];
+    NSString *machServiceName = [[ExtensionBundle shared] extensionBundleMachService:bundle];
     NSXPCConnection *newConnection = [[NSXPCConnection alloc] initWithMachServiceName:machServiceName options:0];
 
     // The exported object is the delegate.
@@ -65,9 +65,9 @@ static NetworkCommunication *sharedInstance = nil;
 
     if (!providerProxy) {
       @throw [NSException
-               exceptionWithName:NSInternalInconsistencyException
-               reason:@"Failed to create a remote object proxy for the provider"
-               userInfo:nil];
+        exceptionWithName:NSInternalInconsistencyException
+        reason:@"Failed to create a remote object proxy for the provider"
+        userInfo:nil];
     }
     
     [providerProxy register:^(BOOL success) {
@@ -118,9 +118,9 @@ static NetworkCommunication *sharedInstance = nil;
 
   if (!appProxy) {
     @throw [NSException
-             exceptionWithName:NSInternalInconsistencyException
-             reason:@"Failed to create a remote object proxy for the app"
-             userInfo:nil];
+      exceptionWithName:NSInternalInconsistencyException
+      reason:@"Failed to create a remote object proxy for the app"
+      userInfo:nil];
   }
 
   responseHandler(YES);

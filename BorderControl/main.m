@@ -17,7 +17,7 @@ int main(int argc, const char * argv[]) {
     NSObject *delegate = [NSObject new];
     NetworkCommunication *sharedConnection = [NetworkCommunication shared];
     [sharedConnection
-      registerWithExtension:[[ExtensionBundle shared] extensionBundle]
+      registerWithExtension:[[ExtensionBundle shared] extensionBundle:[NSBundle mainBundle]]
       delegate:delegate
       completionHandler:^(BOOL success) {
         dispatch_async(dispatch_get_main_queue(), ^{

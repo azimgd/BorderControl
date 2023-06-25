@@ -20,43 +20,43 @@ static ExtensionBundle *sharedInstance = nil;
   return sharedInstance;
 }
 
-- (NSBundle *)extensionBundle {
+- (NSBundle *)extensionBundle:(NSBundle *)bundle; {
   NSURL *extensionsDirectoryURL = [NSURL
-                                    fileURLWithPath:@"Contents/Library/SystemExtensions"
-                                    relativeToURL:[[NSBundle mainBundle] bundleURL]];
+    fileURLWithPath:@"Contents/Library/SystemExtensions"
+    relativeToURL:[[NSBundle mainBundle] bundleURL]];
   NSArray<NSURL *> *extensionURLs;
   NSError *error;
 
   extensionURLs = [[NSFileManager defaultManager]
-                    contentsOfDirectoryAtURL:extensionsDirectoryURL
-                    includingPropertiesForKeys:nil
-                    options:NSDirectoryEnumerationSkipsHiddenFiles
-                    error:&error];
+    contentsOfDirectoryAtURL:extensionsDirectoryURL
+    includingPropertiesForKeys:nil
+    options:NSDirectoryEnumerationSkipsHiddenFiles
+    error:&error];
 
   if (error) {
     NSString *errorMessage = [NSString
-                               stringWithFormat:@"Failed to get the contents of %@: %@",
-                               extensionsDirectoryURL.absoluteString,
-                               error.localizedDescription];
+      stringWithFormat:@"Failed to get the contents of %@: %@",
+      extensionsDirectoryURL.absoluteString,
+      error.localizedDescription];
 
     @throw [NSException
-             exceptionWithName:NSGenericException
-             reason:errorMessage
-             userInfo:nil];
+      exceptionWithName:NSGenericException
+      reason:errorMessage
+      userInfo:nil];
   }
 
   if (extensionURLs.count == 0) {
     @throw [NSException
-             exceptionWithName:NSGenericException
-             reason:@"Failed to find any system extensions"
-             userInfo:nil];
+      exceptionWithName:NSGenericException
+      reason:@"Failed to find any system extensions"
+      userInfo:nil];
   }
 
   NSBundle *extensionBundle = [NSBundle bundleWithURL:extensionURLs.firstObject];
   if (!extensionBundle) {
     NSString *errorMessage = [NSString
-                               stringWithFormat:@"Failed to create a bundle with URL %@",
-                               extensionURLs.firstObject.absoluteString];
+      stringWithFormat:@"Failed to create a bundle with URL %@",
+      extensionURLs.firstObject.absoluteString];
 
     @throw [NSException exceptionWithName:NSGenericException reason:errorMessage userInfo:nil];
   }
@@ -65,7 +65,7 @@ static ExtensionBundle *sharedInstance = nil;
 }
 
 
-- (NSString *)extensionMachServiceNameFromBundle:(NSBundle *)bundle {
+- (NSString *)extensionBundleMachService:(NSBundle *)bundle {
   NSDictionary *networkExtensionKeys = [bundle objectForInfoDictionaryKey:@"NetworkExtension"];
   NSString *machServiceName = networkExtensionKeys[@"NEMachServiceName"];
 

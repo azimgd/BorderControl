@@ -12,8 +12,8 @@
 
 @property (class, nonatomic, readonly) ExtensionBundle *shared;
 
-- (NSBundle *)extensionBundle;
-- (NSString *)extensionMachServiceNameFromBundle:(NSBundle *)bundle;
+- (NSBundle *)extensionBundle:(NSBundle *)bundle;;
+- (NSString *)extensionBundleMachService:(NSBundle *)bundle;
 
 @end
 

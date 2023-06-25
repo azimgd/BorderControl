@@ -23,7 +23,7 @@ static NetworkExtension *sharedInstance = nil;
 
 - (void)install
 {
-  NSString *extensionBundleId = [[ExtensionBundle shared] extensionBundle].bundleIdentifier;
+  NSString *extensionBundleId = [[ExtensionBundle shared] extensionBundle:[NSBundle mainBundle]].bundleIdentifier;
   
   OSSystemExtensionRequest *systemRequest = [OSSystemExtensionRequest
     activationRequestForExtension:extensionBundleId
@@ -39,8 +39,8 @@ static NetworkExtension *sharedInstance = nil;
 #pragma OSSystemExtensionRequestDelegate
 
 - (OSSystemExtensionReplacementAction)request:(nonnull OSSystemExtensionRequest *)request
-    actionForReplacingExtension:(nonnull OSSystemExtensionProperties *)existing
-    withExtension:(nonnull OSSystemExtensionProperties *)ext
+  actionForReplacingExtension:(nonnull OSSystemExtensionProperties *)existing
+  withExtension:(nonnull OSSystemExtensionProperties *)ext
 {
   NSLog(@"[#bordercontrol] -> network filter activation requested");
 
@@ -48,7 +48,7 @@ static NetworkExtension *sharedInstance = nil;
 }
 
 - (void)request:(nonnull OSSystemExtensionRequest *)request
-    didFailWithError:(nonnull NSError *)error
+  didFailWithError:(nonnull NSError *)error
 {
   NSLog(@"[#bordercontrol] -> network filter activation request failed %@", error);
 }
@@ -65,7 +65,7 @@ static NetworkExtension *sharedInstance = nil;
       NSLog(@"[#bordercontrol] -> network filter extension settings fetch succeeded");
     }
     
-    NSString *extensionBundleId = [[ExtensionBundle shared] extensionBundle].bundleIdentifier;
+    NSString *extensionBundleId = [[ExtensionBundle shared] extensionBundle:[NSBundle mainBundle]].bundleIdentifier;
 
     NEFilterProviderConfiguration* configuration = [[NEFilterProviderConfiguration alloc] init];
     configuration.filterPackets = false;
