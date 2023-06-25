@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 #import "NetworkCommunication.h"
-#import "ExtensionBundle.h"
 
 @interface NetworkCommunicationExtensionDelegate : NSObject<ExtensionCommunication>
 @end
@@ -33,14 +32,14 @@ static NetworkCommunication *sharedInstance = nil;
   return sharedInstance;
 }
 
-- (void)startListener {
-  NSString *machService = [[ExtensionBundle shared] extensionBundleMachService:[NSBundle mainBundle]];
+- (void)startListener:(NSString *)machService {
   NSXPCListener *listener = [[NSXPCListener alloc] initWithMachServiceName:machService];
   listener.delegate = self;
   [listener resume];
+  self.listener = listener;
 }
 
-- (void)startConnection:(NSBundle *)bundle {
+- (void)startConnection:(NSString *)machService {
   if (self.connection) {
     @throw [NSException
       exceptionWithName:NSInternalInconsistencyException
@@ -48,7 +47,6 @@ static NetworkCommunication *sharedInstance = nil;
       userInfo:nil];
   }
 
-  NSString *machService = [[ExtensionBundle shared] extensionBundleMachService:bundle];
   NSXPCConnection *newConnection = [[NSXPCConnection alloc] initWithMachServiceName:machService options:0];
 
   // The exported object is the delegate.
@@ -78,27 +76,27 @@ static NetworkCommunication *sharedInstance = nil;
   }
 }
 
-- (BOOL)listener:(NSXPCListener *)listener shouldAcceptNewConnection:(NSXPCConnection *)newConnection {
+- (BOOL)listener:(NSXPCListener *)listener shouldAcceptNewConnection:(NSXPCConnection *)connection {
   // The exported object is this NetworkCommunication instance.
   NSXPCInterface *exportedInterface = [NSXPCInterface interfaceWithProtocol:@protocol(ExtensionCommunication)];
-  newConnection.exportedInterface = exportedInterface;
-  newConnection.exportedObject = [NetworkCommunicationExtensionDelegate new];
+  connection.exportedInterface = exportedInterface;
+  connection.exportedObject = [NetworkCommunicationExtensionDelegate new];
 
   // The remote object is the delegate of the app's NetworkConnection instance.
   NSXPCInterface *remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HostCommunication)];
-  newConnection.remoteObjectInterface = remoteObjectInterface;
+  connection.remoteObjectInterface = remoteObjectInterface;
 
-  newConnection.invalidationHandler = ^{
+  connection.invalidationHandler = ^{
     self.connection = nil;
   };
 
-  newConnection.interruptionHandler = ^{
+  connection.interruptionHandler = ^{
     self.connection = nil;
   };
 
-  self.connection = newConnection;
-  [newConnection resume];
-
+  self.connection = connection;
+  [connection resume];
+  
   return YES;
 }
 

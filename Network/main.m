@@ -8,12 +8,14 @@
 #import <Foundation/Foundation.h>
 #import <NetworkExtension/NetworkExtension.h>
 #import "NetworkCommunication.h"
+#import "ExtensionBundle.h"
 
 int main(int argc, char *argv[])
 {
   @autoreleasepool {
     [NEProvider startSystemExtensionMode];
-    [[NetworkCommunication shared] startListener];
+    NSString *machService = [[ExtensionBundle shared] extensionBundleMachService:[NSBundle mainBundle]];
+    [[NetworkCommunication shared] startListener:machService];
   }
 
   dispatch_main();

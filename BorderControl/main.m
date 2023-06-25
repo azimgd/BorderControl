@@ -14,8 +14,9 @@ int main(int argc, const char * argv[]) {
   @autoreleasepool {
     [[NetworkExtension shared] install];
     
-    id extensionBundleID = [[ExtensionBundle shared] extensionBundle:[NSBundle mainBundle]];
-    [[NetworkCommunication shared] startConnection:extensionBundleID];
+    NSBundle *extensionBundle = [[ExtensionBundle shared] extensionBundle:[NSBundle mainBundle]];
+    NSString *machService = [[ExtensionBundle shared] extensionBundleMachService:extensionBundle];
+    [[NetworkCommunication shared] startConnection:machService];
 
     [[NetworkCommunication shared] dispatcher:@"str" callback:^(NSString *payload) {
       NSLog(@"#machService: %@", payload);

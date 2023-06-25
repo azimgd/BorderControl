@@ -28,9 +28,9 @@
 @property (nonatomic, strong) NSXPCConnection *connection;
 @property (class, nonatomic, readonly) NetworkCommunication *shared;
 
-- (void)startListener;
+- (void)startListener:(NSString *)machService;
 
-- (void)startConnection:(NSBundle *)bundle;
+- (void)startConnection:(NSString *)machService;
 
 - (void)dispatcher:(NSString *)payload callback:(void (^)(NSString *))callback;
 
