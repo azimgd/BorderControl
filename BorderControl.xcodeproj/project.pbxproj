@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6378C61B2A47B85100E1D2C4 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6378C61A2A47B85100E1D2C4 /* libEndpointSecurity.tbd */; };
+		6378C61E2A47B85100E1D2C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6378C61D2A47B85100E1D2C4 /* main.m */; };
+		6378C6232A47B85100E1D2C4 /* com.azimgd.BorderControl.Security.systemextension in Embed System Extensions */ = {isa = PBXBuildFile; fileRef = 6378C6192A47B85100E1D2C4 /* com.azimgd.BorderControl.Security.systemextension */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6378C6292A47B87D00E1D2C4 /* SecurityExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6378C6282A47B87D00E1D2C4 /* SecurityExtension.m */; };
 		63938C572A38BCD600734619 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C562A38BCD600734619 /* AppDelegate.m */; };
 		63938C5A2A38BCD600734619 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63938C592A38BCD600734619 /* ViewController.m */; };
 		63938C5C2A38BCD800734619 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63938C5B2A38BCD800734619 /* Assets.xcassets */; };
@@ -29,6 +33,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6378C6212A47B85100E1D2C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63938C4A2A38BCD600734619 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6378C6182A47B85100E1D2C4;
+			remoteInfo = Security;
+		};
 		63938C792A38BD2C00734619 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 63938C4A2A38BCD600734619 /* Project object */;
@@ -46,6 +57,7 @@
 			dstSubfolderSpec = 16;
 			files = (
 				63938C7B2A38BD2C00734619 /* com.azimgd.BorderControl.Network.systemextension in Embed System Extensions */,
+				6378C6232A47B85100E1D2C4 /* com.azimgd.BorderControl.Security.systemextension in Embed System Extensions */,
 			);
 			name = "Embed System Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,6 +76,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6378C6192A47B85100E1D2C4 /* com.azimgd.BorderControl.Security.systemextension */ = {isa = PBXFileReference; explicitFileType = "wrapper.system-extension"; includeInIndex = 0; path = com.azimgd.BorderControl.Security.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
+		6378C61A2A47B85100E1D2C4 /* libEndpointSecurity.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libEndpointSecurity.tbd; path = usr/lib/libEndpointSecurity.tbd; sourceTree = SDKROOT; };
+		6378C61D2A47B85100E1D2C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6378C61F2A47B85100E1D2C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6378C6202A47B85100E1D2C4 /* Security.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Security.entitlements; sourceTree = "<group>"; };
+		6378C6272A47B86D00E1D2C4 /* SecurityExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecurityExtension.h; sourceTree = "<group>"; };
+		6378C6282A47B87D00E1D2C4 /* SecurityExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecurityExtension.m; sourceTree = "<group>"; };
 		63938C522A38BCD600734619 /* BorderControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BorderControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63938C552A38BCD600734619 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		63938C562A38BCD600734619 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -90,6 +109,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6378C6162A47B85100E1D2C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6378C61B2A47B85100E1D2C4 /* libEndpointSecurity.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63938C4F2A38BCD600734619 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -111,12 +138,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6378C61C2A47B85100E1D2C4 /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				6378C61D2A47B85100E1D2C4 /* main.m */,
+				6378C61F2A47B85100E1D2C4 /* Info.plist */,
+				6378C6202A47B85100E1D2C4 /* Security.entitlements */,
+			);
+			path = Security;
+			sourceTree = "<group>";
+		};
 		63938C492A38BCD600734619 = {
 			isa = PBXGroup;
 			children = (
 				63938C8D2A39CD5A00734619 /* Shared */,
 				63938C542A38BCD600734619 /* BorderControl */,
 				63938C712A38BD2C00734619 /* Network */,
+				6378C61C2A47B85100E1D2C4 /* Security */,
 				63938C532A38BCD600734619 /* Products */,
 				63938C682A38BD1200734619 /* Frameworks */,
 			);
@@ -127,6 +165,7 @@
 			children = (
 				63938C522A38BCD600734619 /* BorderControl.app */,
 				63938C6F2A38BD2C00734619 /* com.azimgd.BorderControl.Network.systemextension */,
+				6378C6192A47B85100E1D2C4 /* com.azimgd.BorderControl.Security.systemextension */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,6 +183,8 @@
 				63938C622A38BCD800734619 /* BorderControl.entitlements */,
 				63938C842A38BE3E00734619 /* NetworkExtension.h */,
 				63938C852A38BE4D00734619 /* NetworkExtension.m */,
+				6378C6272A47B86D00E1D2C4 /* SecurityExtension.h */,
+				6378C6282A47B87D00E1D2C4 /* SecurityExtension.m */,
 			);
 			path = BorderControl;
 			sourceTree = "<group>";
@@ -153,6 +194,7 @@
 			children = (
 				639D73672A46C3EC00002B3A /* SocketRocket.xcframework */,
 				63938C692A38BD1200734619 /* NetworkExtension.framework */,
+				6378C61A2A47B85100E1D2C4 /* libEndpointSecurity.tbd */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -183,6 +225,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6378C6182A47B85100E1D2C4 /* Security */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6378C6262A47B85100E1D2C4 /* Build configuration list for PBXNativeTarget "Security" */;
+			buildPhases = (
+				6378C6152A47B85100E1D2C4 /* Sources */,
+				6378C6162A47B85100E1D2C4 /* Frameworks */,
+				6378C6172A47B85100E1D2C4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Security;
+			productName = Security;
+			productReference = 6378C6192A47B85100E1D2C4 /* com.azimgd.BorderControl.Security.systemextension */;
+			productType = "com.apple.product-type.system-extension";
+		};
 		63938C512A38BCD600734619 /* BorderControl */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 63938C652A38BCD800734619 /* Build configuration list for PBXNativeTarget "BorderControl" */;
@@ -196,6 +255,7 @@
 			);
 			dependencies = (
 				63938C7A2A38BD2C00734619 /* PBXTargetDependency */,
+				6378C6222A47B85100E1D2C4 /* PBXTargetDependency */,
 			);
 			name = BorderControl;
 			productName = BorderControl;
@@ -229,6 +289,9 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
+					6378C6182A47B85100E1D2C4 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
 					63938C512A38BCD600734619 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
@@ -252,11 +315,19 @@
 			targets = (
 				63938C512A38BCD600734619 /* BorderControl */,
 				63938C6E2A38BD2C00734619 /* Network */,
+				6378C6182A47B85100E1D2C4 /* Security */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6378C6172A47B85100E1D2C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63938C502A38BCD600734619 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -276,6 +347,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6378C6152A47B85100E1D2C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6378C61E2A47B85100E1D2C4 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63938C4E2A38BCD600734619 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -285,6 +364,7 @@
 				63938C902A39CD7A00734619 /* ExtensionBundle.m in Sources */,
 				639D73722A46C5E700002B3A /* NetworkCommunication.m in Sources */,
 				63938C572A38BCD600734619 /* AppDelegate.m in Sources */,
+				6378C6292A47B87D00E1D2C4 /* SecurityExtension.m in Sources */,
 				63938C862A38BE4D00734619 /* NetworkExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,6 +384,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6378C6222A47B85100E1D2C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6378C6182A47B85100E1D2C4 /* Security */;
+			targetProxy = 6378C6212A47B85100E1D2C4 /* PBXContainerItemProxy */;
+		};
 		63938C7A2A38BD2C00734619 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 63938C6E2A38BD2C00734619 /* Network */;
@@ -323,6 +408,58 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6378C6242A47B85100E1D2C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Security/Security.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B6BB88CAP5;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Security/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Security;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azimgd.BorderControl.Security;
+				PRODUCT_NAME = "$(inherited)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		6378C6252A47B85100E1D2C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Security/Security.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B6BB88CAP5;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Security/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Security;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azimgd.BorderControl.Security;
+				PRODUCT_NAME = "$(inherited)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
 		63938C632A38BCD800734619 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -541,6 +678,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6378C6262A47B85100E1D2C4 /* Build configuration list for PBXNativeTarget "Security" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6378C6242A47B85100E1D2C4 /* Debug */,
+				6378C6252A47B85100E1D2C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		63938C4D2A38BCD600734619 /* Build configuration list for PBXProject "BorderControl" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

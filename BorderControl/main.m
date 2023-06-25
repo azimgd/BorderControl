@@ -7,6 +7,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "NetworkExtension.h"
+#import "SecurityExtension.h"
 #import "ExtensionBundle.h"
 
 int main(int argc, const char * argv[]) {
