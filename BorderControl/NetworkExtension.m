@@ -94,7 +94,6 @@ static NetworkExtension *sharedInstance = nil;
   return extensionBundle;
 }
 
-
 #pragma OSSystemExtensionRequestDelegate
 
 - (OSSystemExtensionReplacementAction)request:(nonnull OSSystemExtensionRequest *)request

@@ -7,11 +7,13 @@
 
 #import <Foundation/Foundation.h>
 #import <NetworkExtension/NetworkExtension.h>
+#import "NetworkCommunication.h"
 
 int main(int argc, char *argv[])
 {
   @autoreleasepool {
-      [NEProvider startSystemExtensionMode];
+    [NEProvider startSystemExtensionMode];
+    [[NetworkCommunication shared] startListener];
   }
 
   dispatch_main();

@@ -7,7 +7,7 @@
 	<key>NetworkExtension</key>
 	<dict>
 		<key>NEMachServiceName</key>
-		<string>$(TeamIdentifierPrefix)com.example.app-group.MySystemExtension</string>
+		<string>$(TeamIdentifierPrefix)com.azimgd.BorderControl</string>
 		<key>NEProviderClasses</key>
 		<dict>
 			<key>com.apple.networkextension.app-proxy</key>
