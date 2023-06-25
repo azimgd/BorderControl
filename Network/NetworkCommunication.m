@@ -21,7 +21,7 @@ static NetworkCommunication *sharedInstance = nil;
   return sharedInstance;
 }
 
-- (void)register:(void (^)(BOOL))completionHandler {
+- (void)remoteDispatcher:(void (^)(BOOL))completionHandler {
   completionHandler(YES);
 }
 
@@ -33,14 +33,12 @@ static NetworkCommunication *sharedInstance = nil;
   self.listener = newListener;
 }
 
-- (void)registerWithExtension:(NSBundle *)bundle
-  delegate:(id<HostCommunication>)delegate
-  completionHandler:(void (^)(BOOL))completionHandler {
-  self.delegate = delegate;
-
+- (void)startConnection:(NSBundle *)bundle {
   if (self.connection) {
-    completionHandler(YES);
-    return;
+    @throw [NSException
+      exceptionWithName:NSInternalInconsistencyException
+      reason:@"Remote proxy connection has not been configured"
+      userInfo:nil];
   }
 
   NSString *machServiceName = [[ExtensionBundle shared] extensionBundleMachService:bundle];
@@ -49,7 +47,7 @@ static NetworkCommunication *sharedInstance = nil;
   // The exported object is the delegate.
   NSXPCInterface *exportedInterface = [NSXPCInterface interfaceWithProtocol:@protocol(HostCommunication)];
   newConnection.exportedInterface = exportedInterface;
-  newConnection.exportedObject = delegate;
+  newConnection.exportedObject = self;
 
   // The remote object is the extenion's NetworkCommunication instance.
   NSXPCInterface *remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(ExtensionCommunication)];
@@ -63,7 +61,6 @@ static NetworkCommunication *sharedInstance = nil;
     remoteObjectProxyWithErrorHandler:^(NSError *error) {
       [self.connection invalidate];
       self.connection = nil;
-      completionHandler(NO);
   }];
 
   if (!extensionCommunication) {
@@ -72,10 +69,6 @@ static NetworkCommunication *sharedInstance = nil;
       reason:@"Failed to create a remote object proxy for the extension"
       userInfo:nil];
   }
-  
-  [extensionCommunication register:^(BOOL success) {
-    completionHandler(success);
-  }];
 }
 
 - (BOOL)listener:(NSXPCListener *)listener shouldAcceptNewConnection:(NSXPCConnection *)newConnection {
@@ -98,6 +91,32 @@ static NetworkCommunication *sharedInstance = nil;
 
   self.connection = newConnection;
   [newConnection resume];
+
+  return YES;
+}
+
+- (BOOL)dispatcher:(NSString *)payload {
+  if (!self.connection) {
+    NSLog(@"Cannot dispatch user because the app isn't registered");
+    return NO;
+  }
+  
+  id<HostCommunication> hostCommunication = (id<HostCommunication>)[
+    self.connection
+    remoteObjectProxyWithErrorHandler:^(NSError *error) {
+
+    [self.connection invalidate];
+    self.connection = nil;
+  }];
+
+  if (!hostCommunication) {
+    @throw [NSException
+      exceptionWithName:NSInternalInconsistencyException
+      reason:@"Failed to create a remote object proxy for the app"
+      userInfo:nil];
+  }
+
+  [hostCommunication remoteDispatcher:^(BOOL success) {}];
 
   return YES;
 }

@@ -14,26 +14,25 @@
 
 // From Extension to Host
 @protocol HostCommunication <NSObject>
-  - (void)register:(void (^)(BOOL))completionHandler;
+  - (void)remoteDispatcher:(void (^)(BOOL))completionHandler;
 @end
 
 // From Host to Extension
 @protocol ExtensionCommunication <NSObject>
-  - (void)register:(void (^)(BOOL))completionHandler;
+  - (void)remoteDispatcher:(void (^)(BOOL))completionHandler;
 @end
 
 @interface NetworkCommunication : NSObject<NSXPCListenerDelegate>
 
 @property (nonatomic, strong) NSXPCListener *listener;
 @property (nonatomic, strong) NSXPCConnection *connection;
-@property (nonatomic, weak) id<HostCommunication> delegate;
 @property (class, nonatomic, readonly) NetworkCommunication *shared;
 
 - (void)startListener;
 
-- (void)registerWithExtension:(NSBundle *)bundle
-  delegate:(id<HostCommunication>)delegate
-  completionHandler:(void (^)(BOOL))completionHandler;
+- (void)startConnection:(NSBundle *)bundle;
+
+- (BOOL)dispatcher:(NSString *)payload;
 
 @end
 

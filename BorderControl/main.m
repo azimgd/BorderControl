@@ -10,31 +10,13 @@
 #import "NetworkCommunication.h"
 #import "ExtensionBundle.h"
 
-@interface NetworkDelegate : NSObject<HostCommunication>
-
-@end
-
-@implementation NetworkDelegate
-
-- (void)register:(void (^)(BOOL))completionHandler {
-  NSLog(@"[#bordercontrol]: xpc logs were delivered");
-}
-
-@end
-
 int main(int argc, const char * argv[]) {
   @autoreleasepool {
     [[NetworkExtension shared] install];
     
-    NetworkDelegate *networkDelegate = [NetworkDelegate new];
-    [[NetworkCommunication shared]
-      registerWithExtension:[[ExtensionBundle shared] extensionBundle:[NSBundle mainBundle]]
-      delegate:networkDelegate
-      completionHandler:^(BOOL success) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-          NSLog(@"[#bordercontrol]: xpc connection was established");
-        });
-      }];
+    id extensionBundleID = [[ExtensionBundle shared] extensionBundle:[NSBundle mainBundle]];
+    [[NetworkCommunication shared] startConnection:extensionBundleID];
+    [[NetworkCommunication shared] dispatcher:@"str"];
   }
   return NSApplicationMain(argc, argv);
 }
