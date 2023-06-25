@@ -21,8 +21,9 @@ static NetworkCommunication *sharedInstance = nil;
   return sharedInstance;
 }
 
-- (void)remoteDispatcher:(void (^)(BOOL))completionHandler {
-  completionHandler(YES);
+- (void)remoteDispatcher:(void (^)(NSString *))completionHandler {
+  NSString *payload = @"random payload";
+  completionHandler(payload);
 }
 
 - (void)startListener {
@@ -95,10 +96,12 @@ static NetworkCommunication *sharedInstance = nil;
   return YES;
 }
 
-- (BOOL)dispatcher:(NSString *)payload {
+- (void)dispatcher:(NSString *)payload callback:(void (^)(NSString *))callback {
   if (!self.connection) {
-    NSLog(@"Cannot dispatch user because the app isn't registered");
-    return NO;
+    @throw [NSException
+      exceptionWithName:NSInternalInconsistencyException
+      reason:@"Cannot dispatch user because the app isn't registered"
+      userInfo:nil];
   }
   
   id<HostCommunication> hostCommunication = (id<HostCommunication>)[
@@ -116,9 +119,9 @@ static NetworkCommunication *sharedInstance = nil;
       userInfo:nil];
   }
 
-  [hostCommunication remoteDispatcher:^(BOOL success) {}];
-
-  return YES;
+  [hostCommunication remoteDispatcher:^(NSString *payload) {
+    callback(payload);
+  }];
 }
 
 @end

@@ -16,7 +16,10 @@ int main(int argc, const char * argv[]) {
     
     id extensionBundleID = [[ExtensionBundle shared] extensionBundle:[NSBundle mainBundle]];
     [[NetworkCommunication shared] startConnection:extensionBundleID];
-    [[NetworkCommunication shared] dispatcher:@"str"];
+
+    [[NetworkCommunication shared] dispatcher:@"str" callback:^(NSString *payload) {
+      NSLog(@"#machService: %@", payload);
+    }];
   }
   return NSApplicationMain(argc, argv);
 }
