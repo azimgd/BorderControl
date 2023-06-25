@@ -27,6 +27,7 @@
 @property (nonatomic, strong) NSXPCListener *listener;
 @property (nonatomic, strong) NSXPCConnection *connection;
 @property (class, nonatomic, readonly) NetworkCommunication *shared;
+@property (nonatomic, copy) void (^startListenerCallback)(NSError *);
 
 - (void)startListener:(NSString *)machService callback:(void (^)(NSError *))callback;
 

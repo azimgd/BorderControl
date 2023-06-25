@@ -17,8 +17,8 @@ int main(int argc, const char * argv[]) {
     NSBundle *extensionBundle = [[ExtensionBundle shared] extensionBundle:[NSBundle mainBundle]];
     NSString *machService = [[ExtensionBundle shared] extensionBundleMachService:extensionBundle];
     [[NetworkCommunication shared] startConnection:machService callback:^(NSError *error) {
-      [[NetworkCommunication shared] dispatcher:@"payload" callback:^(NSString *payload) {
-        NSLog(@"#machService: host callback return %@", payload);
+      [[NetworkCommunication shared] dispatcher:@"#1" callback:^(NSString *response) {
+        NSLog(@"[border-control] dispatched correctly #0");
       }];
     }];
   }

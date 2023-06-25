@@ -16,7 +16,9 @@ int main(int argc, char *argv[])
     [NEProvider startSystemExtensionMode];
     NSString *machService = [[ExtensionBundle shared] extensionBundleMachService:[NSBundle mainBundle]];
     [[NetworkCommunication shared] startListener:machService callback:^(NSError *error) {
-      NSLog(@"#machService: daemon callback return %@", error);
+      [[NetworkCommunication shared] dispatcher:@"#1" callback:^(NSString *response) {
+        NSLog(@"[border-control] dispatched correctly #1");
+      }];
     }];
   }
 

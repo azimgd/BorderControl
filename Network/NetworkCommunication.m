@@ -14,6 +14,7 @@
 @implementation NetworkCommunicationExtensionDelegate
 
 - (void)remoteDispatcher:(void (^)(NSString *))callback {
+  NSLog(@"[border-control] dispatched correctly #2");
   NSString *payload = @"random payload";
   callback(payload);
 }
@@ -23,7 +24,6 @@
 @implementation NetworkCommunication
 
 static NetworkCommunication *sharedInstance = nil;
-static void (^startListenerCallback)(NSError *);
 
 + (NetworkCommunication *)shared {
   static dispatch_once_t onceToken;
@@ -38,8 +38,7 @@ static void (^startListenerCallback)(NSError *);
   listener.delegate = self;
   [listener resume];
   self.listener = listener;
-  startListenerCallback = callback;
-  callback(nil);
+  self.startListenerCallback = callback;
 }
 
 - (void)startConnection:(NSString *)machService callback:(void (^)(NSError *))callback {
@@ -101,7 +100,7 @@ static void (^startListenerCallback)(NSError *);
   self.connection = connection;
   [connection resume];
   
-  startListenerCallback(nil);
+  self.startListenerCallback(nil);
   
   return YES;
 }
