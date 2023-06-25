@@ -6,12 +6,14 @@
 //
 
 #import "ViewController.h"
+#import "NetworkExtension.h"
 
 @implementation ViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  [[NetworkExtension shared] install];
   // Do any additional setup after loading the view.
 }
 

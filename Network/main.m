@@ -10,9 +10,9 @@
 
 int main(int argc, char *argv[])
 {
-    @autoreleasepool {
-        [NEProvider startSystemExtensionMode];
-    }
-    
-    dispatch_main();
+  @autoreleasepool {
+      [NEProvider startSystemExtensionMode];
+  }
+
+  dispatch_main();
 }
